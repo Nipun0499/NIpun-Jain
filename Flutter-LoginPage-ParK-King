@@ -1,0 +1,165 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';                                //For components of flutter
+import 'package:flutter_signin_button/flutter_signin_button.dart';    //For Signup buttons like signup with facebook, google, etc.
+import 'package:passwordfield/passwordfield.dart';                    //For PasswordField
+void main()                                                           //main function
+{
+  runApp(                                                             //the method which holds the code of your application(predefined name)
+    MaterialApp(
+      home:Home(),
+    )
+  );
+}
+
+class Home extends StatelessWidget {                                    //Stateless widget Home which is called inside Material App widget in main method
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(                                                        
+        body: setUserForm()
+    );
+  }
+
+  Widget setUserForm() {
+
+    return Stack(children: <Widget>[
+      // Background with gradient
+      Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.bottomCenter,
+                colors: [Colors.red[900], Colors.blue[700]])),
+        //height: MediaQuery.of(context).size.height * 0.3
+      ),
+      //Above card
+      Card(
+        //elevation: 2.0,
+          margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 100.0,bottom: 50.0),
+          child: ListView(
+              padding:
+              EdgeInsets.only(top: 20.0, left: 20.0, right: 18.0, bottom: 5.0),
+              children: <Widget>[
+                Text("Enter Name",textAlign: TextAlign.center, textDirection: TextDirection.ltr, style: TextStyle(
+                  fontSize: 24,
+                  fontStyle: FontStyle.normal,
+                  color:  Colors.red.shade900,
+                ),),
+                TextField(decoration:InputDecoration(
+                  fillColor: Colors.grey.shade300,
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)), borderSide: BorderSide(color: Colors.blue)),
+                  filled: true,
+                  contentPadding: EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+                )
+                ),
+                Text("\nEnter Password",textAlign: TextAlign.center, textDirection: TextDirection.ltr, style: TextStyle(
+                  fontSize: 24,
+                  fontStyle: FontStyle.normal,
+                  color:  Colors.red.shade900,
+                ),),
+                PasswordField(
+
+                  color: Colors.grey.shade300,
+                  hasFloatingPlaceholder: true,
+                  pattern: r'.*[@$#.*].*',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      borderSide: BorderSide(color: Colors.blue)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      borderSide: BorderSide(color: Colors.blue)),
+                  errorMessage: 'must contain special character either . * @ # \$',
+                ),
+                //Text("\n"),
+                ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min, // this will take space as minimum as posible(to center)
+                  children: <Widget>[
+                    SizedBox(
+                      width: 500.0,
+                      height: 50.0,
+                      child:new RaisedButton(
+
+                        child: new Text('Login',textAlign: TextAlign.center, textDirection: TextDirection.ltr, style: TextStyle(
+                          fontSize: 18,
+                          fontStyle: FontStyle.normal,
+                          color:  Colors.white,
+
+                        ),),
+                        onPressed: ()=>print("Login"),
+                        color: Colors.red.shade900, //specify background col
+                      ),),
+                  ],
+                ),
+                InkWell(
+                  child: Text
+                    ("\nForgot Password\n",textAlign: TextAlign.right,textDirection: TextDirection.ltr,
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 16,
+                      color: Colors.blue.shade900,
+                    ),),
+                  onTap: ()=>print("Hello"),
+                ),
+                Text("----------------OR----------------",
+                  textAlign: TextAlign.center,textDirection: TextDirection.ltr,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),),
+                ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min, // this will take space as minimum as posible(to center)
+                  children: <Widget>[
+                    SignInButton(
+                      Buttons.Facebook,
+                      onPressed: () {},
+                    ),
+                    SignInButton(
+                      Buttons.GoogleDark,
+                      onPressed: () {},
+                    )
+                    //Text("Hello",textDirection: TextDirection.ltr,),
+                  ],
+                ),
+                Text("\n"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Don't have an account yet?  ",textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),),
+                    InkWell(
+                      child: Text("Sign up",textDirection: TextDirection.ltr,
+                        style: TextStyle(
+                          color: Colors.blue.shade900,
+                          fontSize: 18,
+                          decoration: TextDecoration.underline,
+                        ),),
+                      onTap: null,
+                    ),
+                  ],
+                )
+              ]
+
+          )),
+      // Positioned to take only AppBar size
+      Positioned(
+        top: 0.0,
+        left: 0.0,
+        right: 0.0,
+        //bottom: 3000.0,
+        child: AppBar(        // Add AppBar here only
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Text("PARK-KING LOGIN PAGE",textAlign: TextAlign.center,),
+        ),
+      ),
+
+    ]);
+  }
+}
+
+
